@@ -71,11 +71,13 @@ This is meant as an educational app and is not to be used to abuse the API in an
 
 ## Support Me
 
-If you find this application useful, consider supporting the developer:
+If you find this application useful, consider supporting me:
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/milky99)
 
-Your support helps maintain and improve this project!
+I'm a refugee in the United States and in desperate need of money so every $ will help
+
+Your support means everything to me!
 
 ## License
 
