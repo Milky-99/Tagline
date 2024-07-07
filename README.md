@@ -44,17 +44,17 @@ For Linux: Use your package manager to install exiv2 (e.g., sudo apt-get install
 Place the app.py file in your project directory.
 Create a virtual environment (recommended):
 
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+```python -m venv venv```
+```source venv/bin/activate```  # On Windows, use ````venv\Scripts\activate````
 
 Install the required packages:
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 Run the setup:
-python setup.py install
+```python setup.py install```
 
 Run the application:
-python app.py
+```python app.py```
 
 
 
