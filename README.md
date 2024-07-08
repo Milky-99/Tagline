@@ -4,6 +4,9 @@ This application is a powerful tool for automatically generating captions and ta
 
 You can obtain an API key from here: (https://aistudio.google.com/app/apikey)
 
+![Screenshot](x1.png)
+
+![Screenshot](x2.png)
 
 ## Features
 
@@ -29,6 +32,10 @@ You can obtain an API key from here: (https://aistudio.google.com/app/apikey)
 7. **View Queue**: Monitor the processing queue with thumbnail previews.
 8. **Retry Processing**: Retry processing for individual images with custom retry counts.
 9. **Copy Results**: Easily copy generated captions and tags to the clipboard.
+
+![Screenshot](x3.png)
+
+![Screenshot](x4.png)
 
 ## Setup and Requirements
 
@@ -57,6 +64,10 @@ Run the application:
 ```python app.py```
 
 The app will need admin privileges if installed to system folders such as c:\program files
+
+![Screenshot](x5.png)
+
+![Screenshot](x6.png)
 
 ## Usage
 
