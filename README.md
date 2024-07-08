@@ -42,11 +42,15 @@ You can obtain an API key from here: (https://aistudio.google.com/app/apikey)
 Please refer to the `setup.py` file for installation instructions and the `requirements.txt` file for a list of required packages.
 
 Make sure you have Python 3.6 or higher installed on your system.
+
 Install the required external tool:
 
 For Windows: Download and install exiv2 from https://www.exiv2.org/download.html
+
 For macOS: Use Homebrew to install exiv2 with brew install exiv2
+
 For Linux: Use your package manager to install exiv2 (e.g., sudo apt-get install exiv2 for Ubuntu)
+
 
 Place the app.py file in your project directory.
 Create a virtual environment (recommended):
