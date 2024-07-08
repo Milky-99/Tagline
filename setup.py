@@ -17,7 +17,7 @@ setup(
             "image_caption_app=app:main",
         ],
     },
-    author="Your Name",
+    author="Milky99",
     author_email="your.email@example.com",
     description="An application for automatically generating captions and tags for images using Google's Gemini AI models.",
     long_description=open("README.md").read(),
