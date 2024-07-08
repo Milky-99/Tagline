@@ -56,7 +56,7 @@ Run the setup:
 Run the application:
 ```python app.py```
 
-
+The app will need admin privileges if installed to system folders such as c:\program files
 
 ## Usage
 
