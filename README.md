@@ -12,7 +12,7 @@ You can obtain an API key from here: (https://aistudio.google.com/app/apikey)
 
 - Supports multiple image formats: JPG, JPEG, PNG, and WebP
 - Uses Google's Gemini AI models for generating captions and tags
-- Embeds generated metadata directly into image files
+- Embeds generated metadata directly into image files(only jpg files at the moment)
 - Manages multiple API keys with automatic switching
 - Customizable safety settings for content generation
 - Adjustable retry counts and delay between processing
