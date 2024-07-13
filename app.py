@@ -15,6 +15,7 @@ import asyncio
 import time
 from cryptography.fernet import Fernet
 import json
+import ctypes
 import sys
 import subprocess
 import exif
@@ -82,7 +83,7 @@ class ImageCaptionApp:
     def setup_support_button(self):
         support_button = ttk.Button(self.root, text="Support Me",
                                     command=lambda: webbrowser.open("https://buymeacoffee.com/milky99"))
-        support_button.grid(row=100, column=0, columnspan=6, sticky="se", padx=10, pady=10)
+        support_button.pack(side=tk.BOTTOM, anchor=tk.SE, padx=10, pady=10)
         self.create_tooltip(support_button, "Support the developer")
 
     def create_tooltip(self, widget, text):
@@ -527,62 +528,56 @@ class ImageCaptionApp:
     
     def create_widgets(self):
         self.api_key = tk.StringVar()
-        tk.Label(self.root, text="Enter your API Key:").grid(row=0, column=0, padx=10, pady=10)
-        tk.Entry(self.root, textvariable=self.api_key, show='*').grid(row=0, column=1, padx=10, pady=10)
-        tk.Button(self.root, text="Save API Key", command=self.add_api_key).grid(row=0, column=2, padx=10, pady=10)
-        tk.Button(self.root, text="Manage API Keys", command=self.manage_api_keys).grid(row=0, column=3, padx=10, pady=10)
-        tk.Label(self.root, text="Delay (seconds):").grid(row=1, column=0, padx=10, pady=10)
-        tk.Entry(self.root, textvariable=self.delay_seconds).grid(row=1, column=1, padx=10, pady=10)
-        tk.Label(self.root, text="Retry Count:").grid(row=1, column=2, padx=10, pady=10)
-        tk.Entry(self.root, textvariable=self.retry_count).grid(row=1, column=3, padx=10, pady=10)
-        tk.Label(self.root, text="Select Model:").grid(row=0, column=4, padx=10, pady=10)
-        model_dropdown = tk.OptionMenu(self.root, self.selected_model, *self.model_options, command=self.on_model_change)
-        model_dropdown.grid(row=0, column=5, padx=10, pady=10)
-        tk.Button(self.root, text="Extra Settings", command=self.create_settings_menu).grid(row=2, column=5, padx=10, pady=10)
-        self.selected_model.trace("w", self.save_selected_model)
-        tk.Button(self.root, text="Upload Images", command=self.upload_images).grid(row=2, column=0, padx=10, pady=10)
-        tk.Button(self.root, text="Add Photos", command=self.add_photos).grid(row=2, column=1, padx=10, pady=10)
-        tk.Button(self.root, text="Stop", command=self.stop_processing_images).grid(row=2, column=2, padx=10, pady=10)
-        tk.Label(self.root, text="Number of Tags:").grid(row=1, column=4, padx=10, pady=10)
-        tk.Entry(self.root, textvariable=self.num_hashtags).grid(row=1, column=5, padx=10, pady=10)
-        self.image_frame = tk.Frame(self.root)
-        self.image_frame.grid(row=3, column=0, columnspan=4, padx=10, pady=10, sticky="nsew")
-
-        self.console_text = tk.Text(self.root, height=10)
-        self.console_text.grid(row=4, column=0, columnspan=4, padx=10, pady=10, sticky="nsew")
-
-        self.console_queue = queue.Queue()
-        self.root.after(100, self.update_console)
-
-        self.root.grid_rowconfigure(3, weight=1)
-        self.root.grid_columnconfigure(0, weight=1)
-        self.root.grid_columnconfigure(1, weight=1)
-        self.root.grid_columnconfigure(2, weight=1)
-        self.root.grid_columnconfigure(3, weight=1)
-
-        self.root.minsize(800, 600)
-
-        clear_button = tk.Button(self.root, text="Clear Tagged Images", command=self.clear_tagged_images)
-        clear_button.grid(row=2, column=4, padx=10, pady=10)
-
-       
-        self.bind_mousewheel(self.console_text)
         
-        main_content_frame = tk.Frame(self.root)
-        main_content_frame.grid(row=3, column=0, columnspan=6, padx=10, pady=10, sticky="nsew")
-        main_content_frame.grid_columnconfigure(0, weight=3)
-        main_content_frame.grid_columnconfigure(1, weight=0)  
+        main_frame = tk.Frame(self.root)
+        main_frame.pack(fill=tk.BOTH, expand=True)
 
-        self.image_frame = tk.Frame(main_content_frame)
-        self.image_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+        
+        
+        top_frame = tk.Frame(main_frame)
+        top_frame.pack(fill=tk.X, padx=10, pady=10)
 
-        queue_width = 200  
-        self.queue_frame = tk.Frame(main_content_frame, width=queue_width)
-        self.queue_frame.grid(row=0, column=1, padx=10, pady=10, sticky="ns")
-        self.queue_frame.pack_propagate(False)  
+        tk.Label(top_frame, text="Enter your API Key:").grid(row=0, column=0, padx=5, pady=5)
+        tk.Entry(top_frame, textvariable=self.api_key).grid(row=0, column=1, padx=5, pady=5)  
+        
 
-        self.queue_canvas = tk.Canvas(self.queue_frame, width=queue_width)
-        self.queue_scrollbar = tk.Scrollbar(self.queue_frame, orient="vertical", command=self.queue_canvas.yview)
+        tk.Button(top_frame, text="Save API Key", command=self.add_api_key).grid(row=0, column=2, padx=5, pady=5)
+        tk.Button(top_frame, text="Manage API Keys", command=self.manage_api_keys).grid(row=0, column=3, padx=5, pady=5)
+
+        tk.Label(top_frame, text="Delay (seconds):").grid(row=1, column=0, padx=5, pady=5)
+        tk.Entry(top_frame, textvariable=self.delay_seconds).grid(row=1, column=1, padx=5, pady=5)
+        tk.Label(top_frame, text="Retry Count:").grid(row=1, column=2, padx=5, pady=5)
+        tk.Entry(top_frame, textvariable=self.retry_count).grid(row=1, column=3, padx=5, pady=5)
+
+        tk.Label(top_frame, text="Select Model:").grid(row=0, column=4, padx=5, pady=5)
+        model_dropdown = tk.OptionMenu(top_frame, self.selected_model, *self.model_options, command=self.on_model_change)
+        model_dropdown.grid(row=0, column=5, padx=5, pady=5)
+
+        tk.Button(top_frame, text="Extra Settings", command=self.create_settings_menu).grid(row=1, column=5, padx=5, pady=5)
+
+        tk.Button(top_frame, text="Upload Images", command=self.upload_images).grid(row=2, column=0, padx=5, pady=5)
+        tk.Button(top_frame, text="Add Photos", command=self.add_photos).grid(row=2, column=1, padx=5, pady=5)
+        tk.Button(top_frame, text="Stop", command=self.stop_processing_images).grid(row=2, column=2, padx=5, pady=5)
+        tk.Label(top_frame, text="Number of Tags:").grid(row=2, column=3, padx=5, pady=5)
+        tk.Entry(top_frame, textvariable=self.num_hashtags).grid(row=2, column=4, padx=5, pady=5)
+        
+        clear_button = tk.Button(top_frame, text="Clear Tagged Images", command=self.clear_tagged_images)
+        clear_button.grid(row=2, column=5, padx=5, pady=5)
+
+        middle_frame = tk.Frame(main_frame)
+        middle_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        self.image_frame = tk.Frame(middle_frame)
+        self.image_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        queue_frame = tk.Frame(middle_frame, width=200)
+        queue_frame.pack(side=tk.RIGHT, fill=tk.Y)
+        queue_frame.pack_propagate(False)
+
+        tk.Label(queue_frame, text="Image Queue", font=("Arial", 12, "bold")).pack(pady=5)
+
+        self.queue_canvas = tk.Canvas(queue_frame)
+        queue_scrollbar = tk.Scrollbar(queue_frame, orient="vertical", command=self.queue_canvas.yview)
         self.scrollable_queue_frame = tk.Frame(self.queue_canvas)
 
         self.scrollable_queue_frame.bind(
@@ -593,15 +588,26 @@ class ImageCaptionApp:
         )
 
         self.queue_canvas.create_window((0, 0), window=self.scrollable_queue_frame, anchor="nw")
-        self.queue_canvas.configure(yscrollcommand=self.queue_scrollbar.set)
+        self.queue_canvas.configure(yscrollcommand=queue_scrollbar.set)
 
         self.queue_canvas.pack(side="left", fill="both", expand=True)
-        self.queue_scrollbar.pack(side="right", fill="y")
+        queue_scrollbar.pack(side="right", fill="y")
+
+        bottom_frame = tk.Frame(main_frame)
+        bottom_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        self.console_text = tk.Text(bottom_frame, height=10)
+        self.console_text.pack(fill=tk.BOTH, expand=True)
+
+        self.console_queue = queue.Queue()
+        self.root.after(100, self.update_console)
 
         self.bind_mousewheel(self.queue_canvas)
+        self.bind_mousewheel(self.console_text)
 
-        tk.Label(self.queue_frame, text="Image Queue", font=("Arial", 12, "bold")).pack(pady=5)
         self.setup_support_button()
+
+        self.selected_model.trace("w", self.save_selected_model)
         
         
 
@@ -1237,6 +1243,7 @@ class ImageCaptionApp:
         self.root.clipboard_clear()
         self.root.clipboard_append(clipboard_content)
         self.print("Copied to clipboard!")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
