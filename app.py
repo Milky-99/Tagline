@@ -53,7 +53,7 @@ class ImageCaptionApp:
 
         self.current_api_key_index = 0 if self.api_keys else None
         
-        self.model_options = ["gemini-pro-vision", "gemini-1.5-flash", "gemini-1.5-pro"]  
+        self.model_options = ["gemini-1.5-pro-002", "gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.5-flash-002", "gemini-1.5-flash-8b"]  
         
         self.create_widgets()
         self.image_queue = queue.Queue()
@@ -169,7 +169,7 @@ class ImageCaptionApp:
                 
                 timeout = max(30.0, float(settings.get("response_timeout", 30.0)))
                 self.response_timeout.set(max(30, min(300, int(settings.get("response_timeout", 30)))))
-                self.selected_model.set(settings.get("selected_model", "gemini-pro-vision"))
+                self.selected_model.set(settings.get("selected_model", "gemini-1.5-pro-002"))
                 self.retry_count.set(settings.get("retry_count", 1))
                 self.delay_seconds.set(settings.get("delay_seconds", 1.0))
                 self.api_keys = settings.get("api_keys", [])
@@ -219,7 +219,7 @@ class ImageCaptionApp:
     
     def set_default_settings(self):
         self.set_default_safety_settings()
-        self.selected_model.set("gemini-pro-vision")
+        self.selected_model.set("gemini-1.5-pro-002")
         self.retry_count.set(1)
         self.delay_seconds.set(1.0)
         self.api_keys = []
@@ -241,9 +241,9 @@ class ImageCaptionApp:
                 if saved_model in self.model_options:
                     self.selected_model.set(saved_model)
                 else:
-                    self.selected_model.set("gemini-pro-vision")
+                    self.selected_model.set("gemini-1.5-pro-002")
         except FileNotFoundError:
-            self.selected_model.set("gemini-pro-vision")
+            self.selected_model.set("gemini-1.5-pro-002")
 
     def save_selected_model(self, *args):
         self.save_settings()
