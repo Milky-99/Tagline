@@ -1,5 +1,12 @@
 # Tagline
 
+v 1.1.0 is here:
+![Screenshot](x11.png)
+
+![Screenshot](x22.png)
+
+
+
 This application is a powerful tool for automatically generating captions and tags for images using Google's Gemini AI models. It provides a user-friendly interface for processing multiple images, embedding metadata, and managing API keys.
 
 You can obtain an API key from here: (https://aistudio.google.com/app/apikey)
