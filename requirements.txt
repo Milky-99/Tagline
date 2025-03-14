@@ -1,6 +1,11 @@
-google-generativeai
+tkinter
 Pillow
+google-generativeai
 piexif
 cryptography
+tkinterdnd2
+qdarkstyle
+PyQt5
 requests
-exif
+exifread  #Corrected: exifread instead of exif
+win32com
